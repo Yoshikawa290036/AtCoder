@@ -32,7 +32,7 @@ ll my_lower_bound(vector<T> &vec, T key);
 
 int main()
 {
-
+    
     return 0;
 }
 
