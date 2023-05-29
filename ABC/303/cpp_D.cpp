@@ -32,6 +32,49 @@ ll my_lower_bound(vector<T> &vec, T key);
 
 int main()
 {
+    ll x, y, z;
+    cin >> x >> y >> z;
+    string s;
+    cin >> s;
+
+    vector<ll> capon(s.size() + 5);
+    vector<ll> capoff(s.size() + 5);
+
+    if (s[0] == 'a')
+    {
+        capoff[0] = x;
+        capon[0] = z + y;
+    }
+    else
+    {
+        capoff[0] = y;
+        capon[0] = z + x;
+    }
+
+    for (size_t i = 1; i < s.size(); i++)
+    {
+        if (s[i] == 'a')
+        {
+            capoff[i] = min(capoff[i - 1] + x, capon[i - 1] + z + x);
+            capon[i] = min(capoff[i - 1] + z + y, capon[i - 1] + y);
+        }
+        else
+        {
+            capoff[i] = min(capoff[i - 1] + y, capon[i - 1] + z + y);
+            capon[i] = min(capoff[i - 1] + z + x, capon[i - 1] + x);
+        }
+    }
+    cout << min(capoff[s.size() - 1], capon[s.size() - 1]) << endl;
+    // for (size_t i = 0; i < s.size(); i++)
+    // {
+    //     cout << capoff[i] << ' ';
+    // }
+    // cout << endl;
+    // for (size_t i = 0; i < s.size(); i++)
+    // {
+    //     cout << capon[i] << ' ';
+    // }
+    // cout << endl;
 
     return 0;
 }
